@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digital Event Counter</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #100b20, #30204e);
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.container {
+    background: #1c1530;
+    width: 100%;
+    max-width: 500px;
+    padding: 35px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 10px 40px #0008;
+    border: 1px solid #574075;
+}
+
+h1 {
+    color: #c084fc;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    color: #c4b5d5;
+    margin-bottom: 25px;
+}
+
+input {
+    width: 100%;
+    padding: 13px;
+    background: #100b20;
+    color: white;
+    border: 1px solid #75549a;
+    border-radius: 8px;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.counter-box {
+    background: #100b20;
+    padding: 25px;
+    border-radius: 15px;
+    margin-bottom: 25px;
+}
+
+.counter-box h2 {
+    color: #c084fc;
+    margin-bottom: 15px;
+}
+
+#count {
+    font-size: 65px;
+    font-weight: bold;
+    color: white;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+button {
+    border: none;
+    padding: 13px 22px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: .3s;
+}
+
+button:hover {
+    transform: translateY(-3px);
+    opacity: .85;
+}
+
+.increment {
+    background: #8b5cf6;
+    color: white;
+}
+
+.decrement {
+    background: #db70a5;
+    color: white;
+}
+
+.reset {
+    background: #475569;
+    color: white;
+}
+
+#status {
+    margin-top: 20px;
+    color: #d8b4fe;
+}
+
+footer {
+    margin-top: 25px;
+    color: #a89ab9;
+    font-size: 13px;
+}
+
+@media(max-width: 450px) {
+    .container {
+        padding: 22px;
+    }
+
+    #count {
+        font-size: 50px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Digital Event Counter</h1>
+
+    <p class="subtitle">
+        Count and manage your events easily.
+    </p>
+
+    <input
+        type="text"
+        id="eventName"
+        placeholder="Enter Event Name"
+    >
+
+    <div class="counter-box">
+
+        <h2 id="displayName">My Event</h2>
+
+        <div id="count">0</div>
+
+        <p>Total Event Count</p>
+
+    </div>
+
+    <div class="buttons">
+
+        <button class="increment" onclick="increase()">
+            + Increment
+        </button>
+
+        <button class="decrement" onclick="decrease()">
+            - Decrement
+        </button>
+
+        <button class="reset" onclick="resetCounter()">
+            Reset
+        </button>
+
+    </div>
+
+    <p id="status">Counter is ready!</p>
+
+    <footer>
+        © 2026 Digital Event Counter
+    </footer>
+
+</div>
+
+<script>
+
+// Initial counter value
+let counter = 0;
+
+// Increase counter
+function increase() {
+
+    counter++;
+
+    updateDisplay();
+
+    document.getElementById("status").innerText =
+        "Count increased successfully!";
+
+}
+
+// Decrease counter
+function decrease() {
+
+    if (counter > 0) {
+
+        counter--;
+
+        updateDisplay();
+
+        document.getElementById("status").innerText =
+            "Count decreased successfully!";
+
+    } else {
+
+        document.getElementById("status").innerText =
+            "Counter cannot go below zero!";
+
+    }
+
+}
+
+// Reset counter
+function resetCounter() {
+
+    counter = 0;
+
+    updateDisplay();
+
+    document.getElementById("status").innerText =
+        "Counter has been reset!";
+
+}
+
+// Update counter display
+function updateDisplay() {
+
+    document.getElementById("count").innerText =
+        counter;
+
+}
+
+// Update event name
+document.getElementById("eventName")
+.addEventListener("input", function() {
+
+    let name = this.value.trim();
+
+    document.getElementById("displayName").innerText =
+        name || "My Event";
+
+});
+
+</script>
+
+</body>
+</html>
